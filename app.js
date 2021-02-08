@@ -21,5 +21,5 @@ app.get('/',controllers.home);
 app.get('*',controllers.error);
 
 app.listen(PORT,()=>{
-    console.log("Server is live");
+    console.log("Server is live at port: "+PORT);
 });

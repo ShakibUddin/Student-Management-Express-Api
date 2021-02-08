@@ -1,18 +1,19 @@
 const { all } = require('./routes');
 const data = require('./student');
+const students = data[0];
 
 exports.home = (req,res) => {
     res.send("<h1>Student Management System</h1>")
 }
 
 exports.getAllStudents = (req,res)=>{
-    console.log(data[0]);
-    res.send(data[0]);
+    console.log(students);
+    res.send(students);
 }
 
 exports.getSpecificStudent = (req,res)=>{
-    if(data[0].hasOwnProperty(req.params.studentId)){
-        res.send(data[0][req.params.studentId]);
+    if(students.hasOwnProperty(req.params.studentId)){
+        res.send(students[req.params.studentId]);
     }
     else{
         res.send("No student found with this id");
@@ -20,9 +21,9 @@ exports.getSpecificStudent = (req,res)=>{
 }
 
 exports.replaceSpecificStudent = (req,res)=>{
-    if(data[0].hasOwnProperty(req.params.studentId)){
-        data[0][req.body.id] = req.body;
-        delete data[0][req.params.studentId];
+    if(students.hasOwnProperty(req.params.studentId)){
+        students[req.body.id] = req.body;
+        delete students[req.params.studentId];
         res.send("<h1>Student Replaced Successfully.</h1>");
     }
     else{
@@ -31,8 +32,8 @@ exports.replaceSpecificStudent = (req,res)=>{
 }
 
 exports.deleteSpecificStudent = (req,res)=>{
-    if(data[0].hasOwnProperty(req.params.studentId)){
-        delete data[0][req.params.studentId];
+    if(students.hasOwnProperty(req.params.studentId)){
+        delete students[req.params.studentId];
         res.send("<h1>Student Deleted Successfully.</h1>");
     }
     else{
@@ -41,8 +42,12 @@ exports.deleteSpecificStudent = (req,res)=>{
 }
 
 exports.updateSpecificStudent = (req,res)=>{
-    if(data[0].hasOwnProperty(req.params.studentId)){
-        data[0][req.params.studentId] = req.body;
+    if(students.hasOwnProperty(req.params.studentId)){
+        students[req.params.studentId].name = req.body.name || students[req.params.studentId].name;
+        students[req.params.studentId].id = req.body.id || students[req.params.studentId].id;
+        students[req.params.studentId].semester = req.body.semester || students[req.params.studentId].semester;
+        students[req.params.studentId].department = req.body.department || students[req.params.studentId].department;
+        students[req.params.studentId].cgpa = req.body.cgpa || students[req.params.studentId].cgpa;
         res.send("<h1>Student Updated Successfully.</h1>");
     }
     else{
@@ -53,7 +58,7 @@ exports.updateSpecificStudent = (req,res)=>{
 exports.addStudent = (req,res)=>{
     if(req.body !== undefined){
         console.log(req.body);
-        data[0][req.body.id] = req.body;
+        students[req.body.id] = req.body;
         res.send("<h1>Student Added Successfully.</h1>");
     }
     else{
