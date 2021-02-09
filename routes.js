@@ -3,10 +3,10 @@ const {getAllStudents,addStudent,getSpecificStudent,replaceSpecificStudent,delet
 
 router.post('/',addStudent);
 router.get('/all',getAllStudents);
-router.get('/:studentId',getSpecificStudent);
-router.put('/:studentId',replaceSpecificStudent);
-router.delete('/:studentId',deleteSpecificStudent);
-router.patch('/:studentId',updateSpecificStudent);
+router.get('/:id',getSpecificStudent);
+router.put('/:id',replaceSpecificStudent);
+router.delete('/:id',deleteSpecificStudent);
+router.patch('/:id',updateSpecificStudent);
 
 
 module.exports = router;
